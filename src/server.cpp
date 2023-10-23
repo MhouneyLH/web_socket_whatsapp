@@ -49,13 +49,13 @@ int main(const int argc, const char *argv[])
     socklen_t clientAddressLength = sizeof(clientAddress);
 
     std::cout << "SERVER: Accepting incoming connections..." << std::endl;
-    int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLength);
+    const int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLength);
     if (clientSocket == SOCKET_ERROR_CODE)
     {
         std::cerr << "Failed to accept incoming connection" << std::endl;
         return EXIT_FAILURE;
     }
-    std::cout << "SERVER: Accepted incoming connection from" << inet_ntoa(clientAddress.sin_addr) << std::endl;
+    std::cout << "SERVER: Accepted incoming connection from " << inet_ntoa(clientAddress.sin_addr) << std::endl;
 
     // Chatting with the client
     char messageBuffer[MESSAGE_BUFFER_SIZE];
@@ -74,7 +74,7 @@ int main(const int argc, const char *argv[])
         std::cout << "SERVER: Received message from client: " << messageBuffer << std::endl;
 
         // get input from server
-        std::cout << "SERVER: ";
+        std::cout << "SERVER: Enter a message to send to the client: ";
         std::cin.getline(messageBuffer, sizeof(messageBuffer));
 
         // send message to client
