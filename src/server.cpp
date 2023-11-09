@@ -1,3 +1,10 @@
+// @brief: Server application that listens for incoming connections and
+//         sends and receives messages to and from a client.
+// @details: The server application creates a socket, binds it to an address,
+//           listens for incoming connections, accepts an incoming connection,
+//           and then sends and receives messages.
+// @author: Lucas Hünniger & DANIEL BORISENKO
+
 #include <iostream>     // input output operations
 #include <sys/socket.h> // socket handling
 #include <netinet/in.h> // internet address handling
@@ -14,6 +21,8 @@ int main(const int argc, const char *argv[])
 {
     // Create socket
     std::cout << "SERVER: Creating socket..." << std::endl;
+    // SOCK_STREAM: TCP
+    // SOCK_DGRAM: UDP
     const int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == SOCKET_ERROR_CODE)
     {
@@ -64,6 +73,7 @@ int main(const int argc, const char *argv[])
         // clear buffer
         memset(messageBuffer, 0, sizeof(messageBuffer));
 
+        // TODO: hier müsste man forken, damit man gleichzeitig senden und empfangen kann
         // get message from client
         const int bytesRead = recv(clientSocket, messageBuffer, sizeof(messageBuffer), 0);
         if (bytesRead == SOCKET_ERROR_CODE)

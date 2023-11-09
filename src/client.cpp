@@ -1,3 +1,7 @@
+// @brief: Client application that connects to a server and sends and receives messages
+// @author: Lucas Hünniger & DANIEL BORISENKO
+// @details: The client application creates a socket, connects to a server, and then sends and receives messages.
+
 #include <iostream>     // input output operations
 #include <sys/socket.h> // socket handling
 #include <netinet/in.h> // internet address handling
@@ -6,6 +10,7 @@
 #include <unistd.h>     // unix standard -> e.g. close()
 
 static const unsigned int SERVER_PORT = 8080U;
+// adjust this address
 static const char *SERVER_ADDRESS = "127.0.0.1";
 static const int SOCKET_ERROR_CODE = -1;
 static const unsigned int MESSAGE_BUFFER_SIZE = 256U;
